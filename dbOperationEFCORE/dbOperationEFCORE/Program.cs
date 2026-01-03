@@ -1,4 +1,7 @@
 
+using dbOperationEFCORE.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace dbOperationEFCORE
 {
     public class Program
@@ -8,6 +11,9 @@ namespace dbOperationEFCORE
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("AppDb")
+                ));
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
